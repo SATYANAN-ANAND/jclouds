@@ -115,6 +115,7 @@ public class BaseBlobStoreIntegrationTest extends BaseViewLiveTest<BlobStoreCont
 
    @AfterSuite(groups = { "integration", "live" })
    protected void destroyResources() throws Exception {
+      setupContext();
       deleteEverything(view);
 
       view.close();
@@ -133,7 +134,7 @@ public class BaseBlobStoreIntegrationTest extends BaseViewLiveTest<BlobStoreCont
     * want to have a different implementation of context.getBlobStore(). For example, one class may
     * want non-blocking i/o and another class google appengine.
     */
-   @BeforeClass(groups = { "integration", "live" })
+   @BeforeClass(groups = { "integration", "live" }, dependsOnMethods = "setupContext")
    public void setUpResourcesOnThisThread(ITestContext testContext) throws Exception {
       exec = MoreExecutors.listeningDecorator(Executors.newCachedThreadPool());
    }

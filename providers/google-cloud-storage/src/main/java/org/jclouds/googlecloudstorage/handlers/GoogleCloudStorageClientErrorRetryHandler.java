@@ -17,7 +17,6 @@
 package org.jclouds.googlecloudstorage.handlers;
 
 import javax.inject.Singleton;
-import javax.ws.rs.core.Response.Status;
 
 import org.jclouds.http.HttpCommand;
 import org.jclouds.http.HttpResponse;
@@ -28,6 +27,10 @@ import com.google.inject.Inject;
 
 @Singleton
 public final class GoogleCloudStorageClientErrorRetryHandler implements HttpRetryHandler {
+   /** The user has sent too many requests in a given amount of time ("rate limiting"). */
+   // TODO: remove when upgrading to jax-rs api 2.1
+   private static final int TOO_MANY_REQUESTS = 429;
+
    private final BackoffLimitedRetryHandler backoffHandler;
 
    @Inject
@@ -37,7 +40,7 @@ public final class GoogleCloudStorageClientErrorRetryHandler implements HttpRetr
 
    @Override
    public boolean shouldRetryRequest(HttpCommand command, HttpResponse response) {
-      if (response.getStatusCode() == Status.TOO_MANY_REQUESTS.getStatusCode()) {
+      if (response.getStatusCode() == TOO_MANY_REQUESTS) {
          return backoffHandler.shouldRetryRequest(command, response);
       } else {
          return false;

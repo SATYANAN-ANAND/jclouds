@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 /**
  * Tests behavior of {@code ByteArrayToMacAddress}
  */
-@Test(groups = { "unit" }, singleThreaded = true)
+@Test(groups = { "unit" }, sequential = true)
 public class ByteArrayToMacAddressTest {
 
    public void test() {

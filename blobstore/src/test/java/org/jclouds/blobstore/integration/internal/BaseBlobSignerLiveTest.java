@@ -99,7 +99,6 @@ public class BaseBlobSignerLiveTest extends BaseBlobStoreIntegrationTest {
       }
    }
 
-   @Test(enabled = false)
    public void testSignGetUrlWithTime(final long timeout) throws InterruptedException, IOException {
       String name = "hello";
       String text = "fooooooooooooooooooooooo";
@@ -167,7 +166,6 @@ public class BaseBlobSignerLiveTest extends BaseBlobStoreIntegrationTest {
       }
    }
 
-   @Test(enabled = false)
    public void testSignPutUrlWithTime(final long timeout) throws InterruptedException, IOException {
       String name = "hello";
       String text = "fooooooooooooooooooooooo";

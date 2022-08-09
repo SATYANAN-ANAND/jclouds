@@ -22,7 +22,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.ImmutableList;
 
-@Test(groups = "unit", singleThreaded = true)
+@Test(groups = "unit", sequential = true)
 public class JoinOnCommaTest {
    @Test
    public void testIterableLong() {

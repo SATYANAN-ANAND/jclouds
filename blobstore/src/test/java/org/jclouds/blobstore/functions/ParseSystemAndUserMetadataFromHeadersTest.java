@@ -32,7 +32,7 @@ import org.testng.annotations.Test;
 
 import com.google.common.net.HttpHeaders;
 
-@Test(singleThreaded = true)
+@Test(sequential = true)
 public class ParseSystemAndUserMetadataFromHeadersTest {
 
    private ParseSystemAndUserMetadataFromHeaders parser;
