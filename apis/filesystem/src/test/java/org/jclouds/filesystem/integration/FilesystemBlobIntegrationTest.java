@@ -17,6 +17,8 @@
 package org.jclouds.filesystem.integration;
 
 import static org.jclouds.filesystem.util.Utils.isMacOSX;
+import static org.jclouds.utils.TestUtils.NO_INVOCATIONS;
+import static org.jclouds.utils.TestUtils.SINGLE_NO_ARG_INVOCATION;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -44,6 +46,7 @@ import org.jclouds.filesystem.reference.FilesystemConstants;
 import org.jclouds.filesystem.utils.TestUtils;
 import org.jclouds.io.Payload;
 import org.jclouds.io.Payloads;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.SkipException;
 
@@ -64,6 +67,7 @@ public class FilesystemBlobIntegrationTest extends BaseBlobIntegrationTest {
    // Mac OS X HFS+ does not support UserDefinedFileAttributeView:
    // https://bugs.openjdk.java.net/browse/JDK-8030048
    @Override
+   @Test(enabled = false)
    public void checkContentMetadata(Blob blob) {
       if (!isMacOSX()) {
          super.checkContentMetadata(blob);
@@ -204,4 +208,10 @@ public class FilesystemBlobIntegrationTest extends BaseBlobIntegrationTest {
          throw new SkipException("filesystem does not support extended attributes in Mac OSX");
       }
    }
+
+    @DataProvider
+    public Object[][] ignoreOnMacOSX() {
+        return isMacOSX() ? NO_INVOCATIONS
+                : SINGLE_NO_ARG_INVOCATION;
+    }
 }
